@@ -5,22 +5,28 @@ import company.interfaces.Messenger;
 import company.utils.MathUtils;
 public class Main {
     public static void main(String[] args) {
-        try{
-            Person person = new Person("Jan Kula", 36); //stworzona instancja Person
+        try {
+            Person[] people = new Person[5]; // tablica dla 5 osób
 
-            System.out.println("Name: " + person.getName());
-            System.out.println("Age: " + person.getAge());//wyswietlanie informacji o osobie
+            people[0] = new Person("John Doe", 30); //instancja osób
+            people[1] = new Person("Jan Kula", 36);
+            people[2] = new Person("Robert Lewandowski", 35);
+            people[3] = new Person("Adam Bomba", 18);
+            people[4] = new Person("Kuba Drozd", 23);
 
-            int result = MathUtils.add(3, 8);
-            System.out.println("Sum: " + result); //dodawanie dwoch liczb i wysylanie wyniku w tresci wiadomosci
+            int b = 10; // stała b
 
-            Messenger messenger = new EmailMessenger(); //tworzenie instancji emailmessenger i metoda sendmessage
-
-            messenger.sendMessage("Wynik dodawania: " + result);
+            //wyliczanie wartosci dla kazdej osoby(a-wiek, b-utworzona stała)
+            for (int i = 0; i < people.length; i++) {
+                int value = MathUtils.add(people[i].getAge(), b);
+                Messenger messenger = new EmailMessenger();
+                messenger.sendMessage("Wartość dla " + people[i].getName() + ": " + value);
+            }
+            
 
         } catch (InvalidAgeException e){
             System.out.println("Invalid age: " + e.getMessage()); //obsluga wyjatku gdy  wiek jest nieprawidlowy
         }
     }
+    }
 
-}
